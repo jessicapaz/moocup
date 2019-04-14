@@ -32,7 +32,8 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
     def to_representation(self, obj):
         data = {
-            "email": obj.email
+            "email": obj.email,
+            "auth_token": obj.auth_token.pk
         }
         return data
 
