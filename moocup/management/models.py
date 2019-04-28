@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.utils import timezone
 
@@ -18,3 +20,25 @@ class UseManagement(models.Model):
         default=timezone.now
     )
 
+
+class Dashboard(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.PROTECT
+    )
+    accumulated_points = models.IntegerField()
+    saved_cups = models.IntegerField()
+    consumed_water = models.FloatField()
+
+
+class Voucher(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
+    user = models.OneToOneField(
+        User,
+        on_delete=models.PROTECT
+    )
+    points = models.IntegerField()
